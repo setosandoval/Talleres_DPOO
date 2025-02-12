@@ -3,30 +3,50 @@ package uniandes.dpoo.estructuras.logica;
 import java.util.*;
 
 public class SandboxConjuntos {
-    private NavigableSet<String> arbolCadenas;
+    private TreeSet<String> arbolCadenas;
 
     public SandboxConjuntos() {
-        arbolCadenas = new TreeSet<>();
+        arbolCadenas = new TreeSet<String>();
     }
 
     public List<String> getCadenasComoLista() {
-        return new ArrayList<>(arbolCadenas);
+        ArrayList<String> lista = new ArrayList<String>();
+        for(String cadena : arbolCadenas) {
+            lista.add(cadena);
+        }
+        return lista;
     }
 
     public List<String> getCadenasComoListaInvertida() {
-        return new ArrayList<>(arbolCadenas.descendingSet());
+        ArrayList<String> lista = new ArrayList<String>();
+        for(String cadena : arbolCadenas) {
+            lista.add(0, cadena);
+        }
+        return lista;
     }
 
     public String getPrimera() {
-        return arbolCadenas.isEmpty() ? null : arbolCadenas.first();
+        if(arbolCadenas.size() == 0) {
+            return null;
+        }
+        return arbolCadenas.first();
     }
 
     public String getUltima() {
-        return arbolCadenas.isEmpty() ? null : arbolCadenas.last();
+        if(arbolCadenas.size() == 0) {
+            return null;
+        }
+        return arbolCadenas.last();
     }
 
     public Collection<String> getSiguientes(String cadena) {
-        return arbolCadenas.tailSet(cadena, true);
+        ArrayList<String> siguientes = new ArrayList<String>();
+        for(String str : arbolCadenas) {
+            if(str.compareTo(cadena) >= 0) {
+                siguientes.add(str);
+            }
+        }
+        return siguientes;
     }
 
     public int getCantidadCadenas() {
@@ -34,7 +54,9 @@ public class SandboxConjuntos {
     }
 
     public void agregarCadena(String cadena) {
-        arbolCadenas.add(cadena);
+        if(cadena != null) {
+            arbolCadenas.add(cadena);
+        }
     }
 
     public void eliminarCadena(String cadena) {
@@ -42,49 +64,59 @@ public class SandboxConjuntos {
     }
 
     public void eliminarCadenaSinMayusculasOMinusculas(String cadena) {
-        String match = null;
-        for (String s : arbolCadenas) {
-            if (s.equalsIgnoreCase(cadena)) {
-                match = s;
+        String aBorrar = null;
+        for(String str : arbolCadenas) {
+            if(str.toLowerCase().equals(cadena.toLowerCase())) {
+                aBorrar = str;
                 break;
             }
         }
-        if (match != null) {
-            arbolCadenas.remove(match);
+        if(aBorrar != null) {
+            arbolCadenas.remove(aBorrar);
         }
     }
 
     public void eliminarPrimera() {
-        if (!arbolCadenas.isEmpty()) {
-            arbolCadenas.pollFirst();
+        if(arbolCadenas.size() > 0) {
+            arbolCadenas.remove(arbolCadenas.first());
         }
     }
 
     public void reiniciarConjuntoCadenas(List<Object> objetos) {
-        arbolCadenas.clear();
-        for (Object obj : objetos) {
-            arbolCadenas.add(obj.toString());
+        arbolCadenas = new TreeSet<String>();
+        for(Object obj : objetos) {
+            arbolCadenas.add(obj + "");
         }
     }
 
     public void volverMayusculas() {
-        NavigableSet<String> nuevoArbol = new TreeSet<>();
-        for (String cadena : arbolCadenas) {
-            nuevoArbol.add(cadena.toUpperCase());
+        TreeSet<String> temporal = new TreeSet<String>();
+        for(String str : arbolCadenas) {
+            temporal.add(str.toUpperCase());
         }
-        arbolCadenas = nuevoArbol;
+        arbolCadenas = temporal;
     }
 
     public TreeSet<String> invertirCadenas() {
-        return new TreeSet<>(arbolCadenas.descendingSet());
+        TreeSet<String> invertido = new TreeSet<String>();
+        ArrayList<String> temporal = new ArrayList<String>();
+        for(String str : arbolCadenas) {
+            temporal.add(0, str);
+        }
+        for(String str : temporal) {
+            invertido.add(str);
+        }
+        return invertido;
     }
 
     public boolean compararElementos(String[] otroArreglo) {
-        for (String cadena : otroArreglo) {
-            if (!arbolCadenas.contains(cadena)) {
-                return false;
+        boolean contieneTodos = true;
+        for(int i = 0; i < otroArreglo.length; i++) {
+            if(!arbolCadenas.contains(otroArreglo[i])) {
+                contieneTodos = false;
+                break;
             }
         }
-        return true;
+        return contieneTodos;
     }
 }
