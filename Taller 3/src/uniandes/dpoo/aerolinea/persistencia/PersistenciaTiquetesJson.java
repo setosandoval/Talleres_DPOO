@@ -1,6 +1,7 @@
 package uniandes.dpoo.aerolinea.persistencia;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -19,6 +20,7 @@ import uniandes.dpoo.aerolinea.modelo.cliente.ClienteCorporativo;
 import uniandes.dpoo.aerolinea.modelo.cliente.ClienteNatural;
 import uniandes.dpoo.aerolinea.tiquetes.GeneradorTiquetes;
 import uniandes.dpoo.aerolinea.tiquetes.Tiquete;
+
 
 public class PersistenciaTiquetesJson implements IPersistenciaTiquetes
 {

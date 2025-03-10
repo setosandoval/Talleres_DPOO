@@ -16,7 +16,6 @@ public class ClienteNatural extends Cliente {
 	public String getIdentificador() {
 		return nombre;
 	}
-
 	@Override
 	public String getTipoCliente() {
 		return NATURAL;
@@ -25,3 +24,4 @@ public class ClienteNatural extends Cliente {
 	
 	
 }
+

@@ -1,6 +1,7 @@
 package uniandes.dpoo.aerolinea.modelo;
 
 import java.util.Collection;
+
 import java.util.HashMap;
 
 import uniandes.dpoo.aerolinea.exceptions.VueloSobrevendidoException;

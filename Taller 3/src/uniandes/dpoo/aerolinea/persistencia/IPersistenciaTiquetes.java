@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import uniandes.dpoo.aerolinea.exceptions.InformacionInconsistenteException;
 import uniandes.dpoo.aerolinea.modelo.Aerolinea;
+import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
+
 
 /**
  * Esta interfaz define las operaciones relacionadas con la persistencia de los tiquetes de la aerolíena (salvar y cargar)
