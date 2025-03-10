@@ -14,8 +14,9 @@ public abstract class Cliente {
     protected ArrayList<Tiquete> tiquetesUsados;
 
     public Cliente() {
-        this.tiquetesSinUsar = new ArrayList<>();
-        this.tiquetesUsados = new ArrayList<>();
+        this.tiquetesSinUsar = new ArrayList<Tiquete>();
+        this.tiquetesUsados = new ArrayList<Tiquete>();
+        
     }
 
     public abstract String getTipoCliente();
