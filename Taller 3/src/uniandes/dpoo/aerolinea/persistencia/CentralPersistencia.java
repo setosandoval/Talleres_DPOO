@@ -26,6 +26,7 @@ public class CentralPersistencia
      */
     public static IPersistenciaAerolinea getPersistenciaAerolinea( String tipoArchivo ) throws TipoInvalidoException
     {
+		return null;
         // TODO implementar
     }
 
