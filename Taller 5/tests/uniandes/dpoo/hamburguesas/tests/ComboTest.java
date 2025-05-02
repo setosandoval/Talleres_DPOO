@@ -27,8 +27,8 @@ public class ComboTest {
         items.add(hamburguesa);
         items.add(papas);
 
-        comboEspecial = new Combo("Combo Especial", 0.8, items); // 20% descuento
-        comboSinDescuento = new Combo("Combo Regular", 1.0, items); // 0% descuento
+        comboEspecial = new Combo("Combo Especial", 0.2, items); // 20% descuento
+        comboSinDescuento = new Combo("Combo Regular", 0.0, items); // 0% descuento
     }
 
     @AfterEach
@@ -55,12 +55,12 @@ public class ComboTest {
     @Test
     void testGenerarTextoFactura() {
         String textoEsperadoComboEspecial = "Combo Combo Especial\n" +
-                                             " Descuento: 0.8\n" +
+                                             " Descuento: 0.2\n" +
                                              "            13600\n";
         assertEquals(textoEsperadoComboEspecial, comboEspecial.generarTextoFactura(), "El texto de factura del combo especial no es el esperado.");
 
         String textoEsperadoComboRegular = "Combo Combo Regular\n" +
-                                           " Descuento: 1.0\n" +
+                                           " Descuento: 0.0\n" +
                                            "            17000\n";
         assertEquals(textoEsperadoComboRegular, comboSinDescuento.generarTextoFactura(), "El texto de factura del combo regular no es el esperado.");
     }

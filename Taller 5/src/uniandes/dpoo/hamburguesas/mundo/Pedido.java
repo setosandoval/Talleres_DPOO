@@ -95,7 +95,7 @@ public class Pedido
      * Retorna el precio de los productos del pedido
      * @return La sumatoria de los precios de los productos
      */
-    private int getPrecioNetoPedido( )
+    public int getPrecioNetoPedido( )
     {
         int valor = 0;
         for( Producto item : productos )

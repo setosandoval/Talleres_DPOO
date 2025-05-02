@@ -88,6 +88,8 @@ public class Restaurante
     }
 
     /**
+     * CORREGIDO
+     * 
      * Este método cierra un pedido, creando la factura y guardándolo en el histórico de pedidos.
      * 
      * La factura queda guardada en un archivo cuyo nombre debe ser PREFIJO_FACTURAS, seguido del identificador del pedido, y debe tener extensión 'txt'. El archivo debe
@@ -96,13 +98,23 @@ public class Restaurante
      * @throws NoHayPedidoEnCursoException Lanza esta excepción si no hay un pedido en curso
      * @throws FileNotFoundException Lanza esta excepción si hay problemas guardando el archivo
      */
-    public void cerrarYGuardarPedido( ) throws NoHayPedidoEnCursoException, IOException
+    public void cerrarYGuardarPedido() throws NoHayPedidoEnCursoException, IOException
     {
-        if( pedidoEnCurso == null )
-            throw new NoHayPedidoEnCursoException( );
+        if (pedidoEnCurso == null)
+            throw new NoHayPedidoEnCursoException();
 
-        String nombreArchivo = PREFIJO_FACTURAS + pedidoEnCurso.getIdPedido( ) + ".txt";
-        pedidoEnCurso.guardarFactura( new File( CARPETA_FACTURAS + nombreArchivo ) );
+        // Crear el directorio de facturas si no existe
+        File carpetaFacturas = new File(CARPETA_FACTURAS);
+        if (!carpetaFacturas.exists()) {
+            carpetaFacturas.mkdirs();
+        }
+
+        String nombreArchivo = PREFIJO_FACTURAS + pedidoEnCurso.getIdPedido() + ".txt";
+        pedidoEnCurso.guardarFactura(new File(CARPETA_FACTURAS + nombreArchivo));
+        
+        // Agregar el pedido a la lista de pedidos antes de anularlo
+        pedidos.add(pedidoEnCurso);
+        
         pedidoEnCurso = null;
     }
 
@@ -174,6 +186,11 @@ public class Restaurante
 
     private void cargarIngredientes( File archivoIngredientes ) throws IngredienteRepetidoException, IOException
     {
+    	// Si el archivo es null, simplemente retornar sin hacer nada
+        if (archivoIngredientes == null) {
+            return;
+        }
+        
         BufferedReader reader = new BufferedReader( new java.io.FileReader( archivoIngredientes ) );
         try
         {
@@ -211,6 +228,11 @@ public class Restaurante
 
     private void cargarMenu( File archivoMenu ) throws ProductoRepetidoException, IOException
     {
+    	// Si el archivo es null, simplemente retornar sin hacer nada
+        if (archivoMenu == null) {
+            return;
+        }
+        
         BufferedReader reader = new BufferedReader( new java.io.FileReader( archivoMenu ) );
         try
         {
@@ -248,6 +270,11 @@ public class Restaurante
 
     private void cargarCombos( File archivoCombos ) throws ProductoRepetidoException, ProductoFaltanteException, IOException
     {
+    	// Si el archivo es null, simplemente retornar sin hacer nada
+        if (archivoCombos == null) {
+            return;
+        }
+        
         BufferedReader reader = new BufferedReader( new java.io.FileReader( archivoCombos ) );
         try
         {

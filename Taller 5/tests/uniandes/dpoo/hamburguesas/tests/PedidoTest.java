@@ -21,7 +21,7 @@ public class PedidoTest {
 
     @BeforeEach
     void setUp() {
-        pedido = new Pedido("Juan Perez", "Calle 123");
+        pedido = new Pedido("Sergio Sandoval", "Calle Lejos");
         hamburguesa = new ProductoMenu("Hamburguesa Sencilla", 12000);
         papas = new ProductoMenu("Papas Medianas", 5000);
     }
@@ -39,7 +39,7 @@ public class PedidoTest {
 
     @Test
     void testGetNombreCliente() {
-        assertEquals("Juan Perez", pedido.getNombreCliente(), "El nombre del cliente no es el esperado.");
+        assertEquals("Sergio Sandoval", pedido.getNombreCliente(), "El nombre del cliente no es el esperado.");
     }
 
     @Test
@@ -61,8 +61,8 @@ public class PedidoTest {
 
         String facturaGenerada = pedido.generarTextoFactura();
 
-        assertTrue(facturaGenerada.contains("Cliente: Juan Perez"), "La factura debe contener el nombre del cliente.");
-        assertTrue(facturaGenerada.contains("Dirección: Calle 123"), "La factura debe contener la dirección del cliente.");
+        assertTrue(facturaGenerada.contains("Cliente: Sergio Sandoval"), "La factura debe contener el nombre del cliente.");
+        assertTrue(facturaGenerada.contains("Dirección: Calle Lejos"), "La factura debe contener la dirección del cliente.");
         assertTrue(facturaGenerada.contains("Hamburguesa Sencilla"), "La factura debe contener la hamburguesa.");
         assertTrue(facturaGenerada.contains("Papas Medianas"), "La factura debe contener las papas.");
         assertTrue(facturaGenerada.contains("Precio Neto:  17000"), "La factura debe mostrar el precio neto correcto.");
@@ -88,8 +88,8 @@ public class PedidoTest {
 
         String textoArchivo = contenido.toString();
 
-        assertTrue(textoArchivo.contains("Cliente: Juan Perez"), "El archivo debe contener el nombre del cliente.");
-        assertTrue(textoArchivo.contains("Dirección: Calle 123"), "El archivo debe contener la dirección del cliente.");
+        assertTrue(textoArchivo.contains("Cliente: Sergio Sandoval"), "El archivo debe contener el nombre del cliente.");
+        assertTrue(textoArchivo.contains("Dirección: Calle Lejos"), "El archivo debe contener la dirección del cliente.");
         assertTrue(textoArchivo.contains("Hamburguesa Sencilla"), "El archivo debe contener la hamburguesa.");
         assertTrue(textoArchivo.contains("Papas Medianas"), "El archivo debe contener las papas.");
         assertTrue(textoArchivo.contains("Precio Total: 20230"), "El archivo debe contener el precio total correcto.");
