@@ -1,8 +1,9 @@
 package uniandes.dpoo.swing.interfaz.principal;
 
-import java.awt.FlowLayout;
+//import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -28,19 +29,31 @@ public class PanelDetallesRestaurante extends JPanel
      */
     private JCheckBox chkVisitado;
 
-    public PanelDetallesRestaurante( )
-    {
-        // Configura la etiqueta para el nombre
-        // TODO completar el constructor
+    public PanelDetallesRestaurante( ) {
+        setLayout(new GridLayout(3, 1));
+        setBorder(BorderFactory.createTitledBorder("Detalles del Restaurante"));
 
-        // Configura la etiqueta para la calificación
-        // TODO completar el constructor
+        // Nombre
+        JPanel panelAux = new JPanel(new GridLayout(1, 2));
+        panelAux.add(new JLabel("Nombre: "));
+        labNombre = new JLabel();
+        panelAux.add(labNombre);
+        add(panelAux);
 
-        // Configura el checkbox para indicar si ya se visitaó o no el restaurante
-        // TODO completar el constructor
+        // Calificación
+        panelAux = new JPanel(new GridLayout(1, 2));
+        panelAux.add(new JLabel("Calificación: "));
+        labCalificacion = new JLabel();
+        panelAux.add(labCalificacion);
+        add(panelAux);
 
-        // Organiza los elementos en la venta
-        // TODO completar el constructor
+        // Visitado
+        panelAux = new JPanel(new GridLayout(1, 2));
+        panelAux.add(new JLabel("Visitado: "));
+        chkVisitado = new JCheckBox();
+        chkVisitado.setEnabled(false);
+        panelAux.add(chkVisitado);
+        add(panelAux);
     }
 
     /**
@@ -51,7 +64,9 @@ public class PanelDetallesRestaurante extends JPanel
      */
     private void actualizarRestaurante( String nombre, int calificacion, boolean visitado )
     {
-     // TODO completar actualizarRestaurante
+    	labNombre.setText(nombre);
+        labCalificacion.setIcon(buscarIconoCalificacion(calificacion));
+        chkVisitado.setSelected(visitado);
     }
 
     /**

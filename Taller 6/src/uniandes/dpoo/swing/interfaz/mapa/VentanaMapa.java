@@ -1,6 +1,7 @@
 package uniandes.dpoo.swing.interfaz.mapa;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -46,22 +47,48 @@ public class VentanaMapa extends JFrame implements ActionListener
      */
     private VentanaPrincipal ventanaPrincipal;
 
-    public VentanaMapa( VentanaPrincipal ventanaPrincipal, List<Restaurante> restaurantes )
-    {
+    public VentanaMapa(VentanaPrincipal ventanaPrincipal, List<Restaurante> restaurantes) {
         this.ventanaPrincipal = ventanaPrincipal;
 
-        // Agrega el panel donde se muestra el mapa
-        // TODO completar
+        // Configura layout principal
+        setLayout(new BorderLayout());
 
-        // Agrega el panel con los RadioButtons y los configura
-        // TODO completar
+        // Crea el panel del mapa y lo agrega
+        panelMapa = new PanelMapaVisualizar(); 
+        panelMapa.actualizarMapa(restaurantes); 
+        add(panelMapa, BorderLayout.CENTER);
 
-        // Termina de configurar la ventana y la muestra
-        pack( );
-        setResizable( false );
-        setDefaultCloseOperation( DISPOSE_ON_CLOSE );
-        setLocationRelativeTo( null );
+        // Crea el panel de botones de filtro (Sur)
+        JPanel panelRadioButtons = new JPanel(new FlowLayout());
+
+        radioTodos = new JRadioButton("Todos");
+        radioTodos.setActionCommand(TODOS);
+        radioTodos.addActionListener(this);
+        panelRadioButtons.add(radioTodos);
+
+        radioVisitados = new JRadioButton("Visitados");
+        radioVisitados.setActionCommand(VISITADOS);
+        radioVisitados.addActionListener(this);
+        panelRadioButtons.add(radioVisitados);
+
+        // Agrupa los botones para que sean excluyentes
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(radioTodos);
+        grupo.add(radioVisitados);
+
+        // Activa el botón "Todos" por defecto
+        radioTodos.setSelected(true);
+
+        add(panelRadioButtons, BorderLayout.SOUTH);
+
+        // Finaliza configuración de la ventana
+        setTitle("Mapa de Restaurantes");
+        pack();
+        setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
+
 
     @Override
     public void actionPerformed( ActionEvent e )

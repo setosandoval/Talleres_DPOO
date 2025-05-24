@@ -26,21 +26,36 @@ public class PanelEditarRestaurante extends JPanel
      */
     private JComboBox<String> cbbVisitado;
 
-    public PanelEditarRestaurante( )
-    {
-        // Crea el campo para el nombre con una etiqueta al frente
-        // TODO completar
+    public PanelEditarRestaurante() {
+        setLayout(new GridLayout(3, 1));
 
-        // Crea el selector para la calificación con una etiqueta al frente
-        // TODO completar
+        // Línea 1: Nombre
+        JPanel panelNombre = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelNombre.add(new JLabel("Nombre:"));
+        txtNombre = new JTextField(20);
+        panelNombre.add(txtNombre);
+        add(panelNombre);
 
-        // Crea el selector para indicar si ya ha sido visitado, con una etiqueta al frente
-        // TODO completar
+        // Línea 2: Calificación
+        JPanel panelCalificacion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelCalificacion.add(new JLabel("Calificación:"));
+        cbbCalificacion = new JComboBox<>();
+        for (int i = 1; i <= 5; i++) {
+            cbbCalificacion.addItem(String.valueOf(i));
+        }
+        panelCalificacion.add(cbbCalificacion);
+        add(panelCalificacion);
 
-        // Agregar todos los elementos al panel
-        // TODO completar
-
+        // Línea 3: Visitado
+        JPanel panelVisitado = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelVisitado.add(new JLabel("Visitado:"));
+        cbbVisitado = new JComboBox<>();
+        cbbVisitado.addItem("Sí");
+        cbbVisitado.addItem("No");
+        panelVisitado.add(cbbVisitado);
+        add(panelVisitado);
     }
+
 
     /**
      * Indica si en el selector se seleccionó la opción que dice que el restaurante fue visitado
@@ -48,8 +63,11 @@ public class PanelEditarRestaurante extends JPanel
      */
     public boolean getVisitado( )
     {
-        // TODO completar
-        return false;
+    	if (cbbVisitado.getSelectedItem().toString().equals("Si")) {
+        	return true;
+        } else {
+        	return false;
+        }
     }
 
     /**
@@ -68,7 +86,6 @@ public class PanelEditarRestaurante extends JPanel
      */
     public String getNombre( )
     {
-        // TODO completar
-        return "";
+    	 return txtNombre.getText();
     }
 }
